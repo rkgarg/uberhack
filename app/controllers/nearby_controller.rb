@@ -59,7 +59,12 @@ class NearbyController < ApplicationController
     }
   end
 
-
+  def get_request_and_route
+    a = Uber::UberApi.new.get_request
+    route = [[28.261492, 77.1423941], [28.261492, 77.1423941]]
+    eta = a['eta']
+    render :json => {route: route, eta: eta}
+  end
 
 
 end
