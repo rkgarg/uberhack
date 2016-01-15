@@ -39,8 +39,6 @@ class NearbyController < ApplicationController
   end
 
 
-  private
-
 
   def google_places_format obj
     {
