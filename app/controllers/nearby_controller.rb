@@ -1,3 +1,5 @@
+require 'pry'
+require 'uber/uber_api'
 class NearbyController < ApplicationController
 
   def all
