@@ -61,9 +61,14 @@ class NearbyController < ApplicationController
 
   def get_request_and_route
     a = Uber::UberApi.new.get_request
-    route = [[28.261492, 77.1423941], [28.261492, 77.1423941]]
+    a = 'Huda+City+Centre,+Gurgaon'
+    b = 'Haryana/Orchid+Petals,+Sohna+Road'
+    url = "https://maps.googleapis.com/maps/api/directions/json?origin=#{a}&destination=#{b}&key=AIzaSyCiUL3FVScMAT9pXvETbzMQqNcuek2C2WQ"
+    resp_google = HTTParty.get(URI.encode url)
+    steps = resp_google['routes'][0]['legs'][0]['steps']
+    arr = ([] or 10 ); steps.each {|k| arr << k['start_location'].values} ; arr
     eta = a['eta']
-    render :json => {route: route, eta: eta}
+    render :json => {route: arr, eta: eta}
   end
 
 
