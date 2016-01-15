@@ -35,7 +35,7 @@ class NearbyController < ApplicationController
     end
 
 
-    render :json => final_hash
+    render :json => final_hash.shuffle
   end
 
 
