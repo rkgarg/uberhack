@@ -44,8 +44,8 @@ class NearbyController < ApplicationController
 
   def google_places_format obj
     {
-      'lat' => obj["geometry"]["location"]["lat"],
-      'long'=> obj["geometry"]["location"]["lng"],
+      'lat' => obj["geometry"]["location"]["lat"].to_f.round(3),
+      'long'=> obj["geometry"]["location"]["lng"].to_f.round(3),
       'icon' => obj["icon"],
       'name' => obj["name"],
       'categories' => obj["types"],
@@ -56,8 +56,8 @@ class NearbyController < ApplicationController
 
   def eventful_places_format obj
     {
-      'lat' => obj["latitude"],
-      'long'=> obj["longitude"],
+      'lat' => obj["latitude"].to_f.round(3),
+      'long'=> obj["longitude"].to_f.round(3),
       'name' => obj["title"] + obj["venue_name"],
       'categories' => ['Event'],
       'meta' => obj["vicinity"],
@@ -67,8 +67,8 @@ class NearbyController < ApplicationController
 
   def zom_format obj
     {
-      'lat' => obj["location"]["latitude"],
-      'long'=> obj["location"]["longitude"],
+      'lat' => obj["location"]["latitude"].to_f.round(3),
+      'long'=> obj["location"]["longitude"].to_f.round(3),
       'icon' => obj["thumb"],
       'name' => obj["name"],
       'categories' => ['Zomato'],
