@@ -26,14 +26,20 @@ class NearbyController < ApplicationController
 
 
 
-    HTTParty.get("https://developers.zomato.com/api/v2.1/search?lat=28.4774100&lon=77.0689790&radius=20",
+    resp_zom = HTTParty.get("https://developers.zomato.com/api/v2.1/search?lat=#{lat}&lon=#{long}&radius=2000",
     { 
       :headers => { 'Accept' => 'application/json', 'user_key' => 'c3fdcb7cd62590868c5de06df7538201'}
     })
+    JSON.parse(resp_zom.body)["restaurants"].each do |r|
+      final_hash.push(zom_format(r["restaurant"]))
+    end
+
 
     render :json => final_hash
   end
 
+
+  private
 
 
   def google_places_format obj
@@ -56,6 +62,17 @@ class NearbyController < ApplicationController
       'categories' => ['Event'],
       'meta' => obj["vicinity"],
       'time' => obj["start_time"]
+    }
+  end
+
+  def zom_format obj
+    {
+      'lat' => obj["location"]["latitude"],
+      'long'=> obj["location"]["longitude"],
+      'icon' => obj["thumb"],
+      'name' => obj["name"],
+      'categories' => ['Zomato'],
+      'meta' => obj["cuisines"]      
     }
   end
 
