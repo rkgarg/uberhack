@@ -2,6 +2,8 @@ require 'pry'
 require 'uber/uber_api'
 class NearbyController < ApplicationController
 
+  @@ME = 0
+
   def all
     lat , long = params[:lat], params[:long]
     (render :json => {'a' => "fuckkyou send me 'lat' and 'long'"} and return) if lat.nil? or long.nil?
@@ -74,7 +76,13 @@ class NearbyController < ApplicationController
     }
   end
 
+  def class_var
+    @@ME = params['version']
+    render :json => {}
+  end
+
   def get_request_and_route
+    @@ME = (@@ME.to_i or 0)
     a = Uber::UberApi.new.get_request
     a = 'Huda+City+Centre,+Gurgaon'
     b = 'Haryana/Orchid+Petals,+Sohna+Road'
@@ -83,7 +91,7 @@ class NearbyController < ApplicationController
     steps = resp_google['routes'][0]['legs'][0]['steps']
     arr = []; steps.each {|k| arr << k['start_location'].values} ; arr
     eta = (a['eta'] or 10)
-    render :json => {route: arr, eta: eta}
+    render :json => {route: arr[@@ME.to_i..-1], eta: eta}
   end
 
 

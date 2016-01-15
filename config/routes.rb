@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'nearby/all' => 'nearby#all'
   get 'get_request_and_route' => 'nearby#get_request_and_route'
+  get 'set_version' => 'nearby#class_var'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
