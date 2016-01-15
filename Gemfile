@@ -39,3 +39,5 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'httparty', '~> 0.13.5'
+
+gem 'pg'
