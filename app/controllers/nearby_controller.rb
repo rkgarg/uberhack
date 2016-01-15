@@ -22,6 +22,13 @@ class NearbyController < ApplicationController
       final_hash.push(eventful_places_format(r))
     end
 
+
+
+    HTTParty.get("https://developers.zomato.com/api/v2.1/search?lat=28.4774100&lon=77.0689790&radius=20",
+  { 
+    :headers => { 'Accept' => 'application/json', 'user_key' => 'c3fdcb7cd62590868c5de06df7538201'}
+  })
+
     render :json => final_hash
   end
 
