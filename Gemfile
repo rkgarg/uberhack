@@ -40,6 +40,4 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'httparty', '~> 0.13.5'
-
 gem 'pg'
